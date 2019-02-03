@@ -5,7 +5,7 @@ Group Normalization (GN) is an alternative to BN. It first divides channels into
 
 
 ##### Group Normalization in TF : [gn_tf.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_tf.py) 
-##### Group Normalization in Pytorch : [gn_pytorch](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_pytorch.py) 
-##### Group Normalization in MXNet Symbol : [gn_symbol](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_symbol.py)
-##### Group Normalization in MXNet Gluon : [gn_gluon](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_gluon.py)
-##### Group Normalization in MXNet CustomOperator : [groupnormOp](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/groupnormOp.py)
+##### Group Normalization in Pytorch : [gn_pytorch.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_pytorch.py) 
+##### Group Normalization in MXNet Symbol : [gn_symbol.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_symbol.py)
+##### Group Normalization in MXNet Gluon : [gn_gluon.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_gluon.py)
+##### Group Normalization in MXNet CustomOperator : [groupnormOp.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/groupnormOp.py)
