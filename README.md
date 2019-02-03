@@ -14,15 +14,15 @@ Here is an example show how to replace the BN in your network with GN in the res
 
 ```
     def residual_unit(self, data, num_filter, gn_channel, stride, dim_match, name):
-        bn1  = self.GroupNorm(data=data, in_channel = gn_channel, name=name + '_gn1')
+        bn1  = GroupNorm(data=data, in_channel = gn_channel, name=name + '_gn1')
         act1  = mx.sym.Activation(data=bn1, act_type='relu', name=name + '_relu1')
         conv1 = mx.sym.Convolution(data=act1, num_filter=int(num_filter*0.25), kernel=(1, 1), stride=(1, 1), pad=(0, 0),
                                    no_bias=True, workspace=self.workspace, name=name + '_conv1')
-        bn2   = self.GroupNorm(data=conv1, in_channel = int(num_filter*0.25), name=name+'_gn2')
+        bn2   = GroupNorm(data=conv1, in_channel = int(num_filter*0.25), name=name+'_gn2')
         act2  = mx.sym.Activation(data=bn2, act_type='relu', name=name + '_relu2')
         conv2 = mx.sym.Convolution(data=act2, num_filter=int(num_filter * 0.25), kernel=(3, 3), stride=stride, pad=(1, 1),
                                    no_bias=True, workspace=self.workspace, name=name + '_conv2')
-        bn3    = self.GroupNorm(data = conv2, in_channel=int(num_filter * 0.25), name=name+'_gn3')
+        bn3    = GroupNorm(data = conv2, in_channel=int(num_filter * 0.25), name=name+'_gn3')
         act3  = mx.sym.Activation(data=bn3, act_type='relu', name=name + '_relu3')
         conv3 = mx.sym.Convolution(data=act3, num_filter=int(num_filter), kernel=(1, 1), stride=(1, 1), pad=(0, 0), no_bias=True,
                                    workspace=self.workspace, name=name + '_conv3')
