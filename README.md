@@ -10,7 +10,7 @@
 ##### Group Normalization in MXNet CustomOperator : [groupnormOp.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/groupnormOp.py)
 
 ### How to use
-For example, if you want to replace the BN in your network with gn.
+Here is an example show how to replace the BN in your network with GN in the resnet bottleneck.
 
 ```
     def residual_unit(self, data, num_filter, gn_channel, stride, dim_match, name):
