@@ -8,3 +8,29 @@
 ##### Group Normalization in MXNet Symbol : [gn_symbol.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_symbol.py)
 ##### Group Normalization in MXNet Gluon : [gn_gluon.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_gluon.py)
 ##### Group Normalization in MXNet CustomOperator : [groupnormOp.py](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/groupnormOp.py)
+
+### How to use
+For example, if you want to replace the BN in your network with gn.
+
+```
+    def residual_unit(self, data, num_filter, gn_channel, stride, dim_match, name):
+        bn1  = self.GroupNorm(data=data, in_channel = gn_channel, name=name + '_gn1')
+        act1  = mx.sym.Activation(data=bn1, act_type='relu', name=name + '_relu1')
+        conv1 = mx.sym.Convolution(data=act1, num_filter=int(num_filter*0.25), kernel=(1, 1), stride=(1, 1), pad=(0, 0),
+                                   no_bias=True, workspace=self.workspace, name=name + '_conv1')
+        bn2   = self.GroupNorm(data=conv1, in_channel = int(num_filter*0.25), name=name+'_gn2')
+        act2  = mx.sym.Activation(data=bn2, act_type='relu', name=name + '_relu2')
+        conv2 = mx.sym.Convolution(data=act2, num_filter=int(num_filter * 0.25), kernel=(3, 3), stride=stride, pad=(1, 1),
+                                   no_bias=True, workspace=self.workspace, name=name + '_conv2')
+        bn3    = self.GroupNorm(data = conv2, in_channel=int(num_filter * 0.25), name=name+'_gn3')
+        act3  = mx.sym.Activation(data=bn3, act_type='relu', name=name + '_relu3')
+        conv3 = mx.sym.Convolution(data=act3, num_filter=int(num_filter), kernel=(1, 1), stride=(1, 1), pad=(0, 0), no_bias=True,
+                                   workspace=self.workspace, name=name + '_conv3')
+        if dim_match:
+            shortcut = data
+        else:
+            shortcut = mx.sym.Convolution(data=act1, num_filter=int(num_filter), kernel=(1, 1), stride=stride, no_bias=True,
+                                          workspace=self.workspace, name=name + '_sc')
+        sum = mx.sym.ElementWiseSum(*[conv3, shortcut], name=name + '_plus')
+        return sum
+```
