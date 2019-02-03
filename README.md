@@ -3,7 +3,7 @@
 
 Group Normalization (GN) is an alternative to BN. It first divides channels into groups, and then calculates the mean and method in each group for normalization. The calculation of GN is independent of Batch Size, and the accuracy is stable for different Batch Size. In addition, GN is easy to fine-tuning from the pre-trained model. The comparison between GN and BN is shown in the figure.
 
-## Group Normalization in TF
+#### Group Normalization in TF
 [gn_tf](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_tf.py) re-implementation of group normalization in Tensorflow.
-## Group Normalization in Pytorch
+#### Group Normalization in Pytorch
 [gn_pytorch](https://github.com/jianzhnie/GroupNorm-MXNet/blob/master/gn_tf.py) re-implementation of group normalization in Tensorflow.
